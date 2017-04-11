@@ -43,8 +43,11 @@ var check = function(e){
 
     console.log("start: " + tempCombination);
 
+
+
+
     for(var i = 0; i < spanSlots.length; i++) {
-        //console.log(spanSlots);
+        //x console.log(spanSlots);
         //console.log(combination[i]);
         //console.log(slots[i].style.backgroundColor);
 
@@ -53,23 +56,27 @@ var check = function(e){
         if(tempCombination[i] == spanSlots[i].style.backgroundColor){
             //console.log("Kleur op juiste plaats");
             results.push('juiste kleur juiste plek');
-            tempCombination[i] = '';
+            tempCombination.splice(i, 1);
         }
     }
     console.log("einde: " + tempCombination);
 
     for(var j = 0; j < spanSlots.length; j++) {
         // check2 : kleur staat er wel in maar niet op de juiste plaats.
-        var colorIndex = tempCombination.indexOf(spanSlots[j].style.backgroundColor);
-        console.log(colorIndex);
-        // colorIndex is positie van waar de kleur voorkomt in de tempCombination.
-        if (colorIndex != -1) {
+
+        for(u = 0; u < tempCombination.length; u++){
             results.push('kleur aanwezig niet op de juiste plaats');
-            tempCombination[colorIndex] = '';
+            
+            if(tempCombination[u] == spanSlots[j]){
+                tempCombination.splice(u, 1);
+                
+            }
+            else{
+                results.push('kleur niet aanwezig');
+            }  
         }
-        else{
-            results.push('kleur niet aanwezig');
-        }
+
+       
     }
 
     console.dir(results);
